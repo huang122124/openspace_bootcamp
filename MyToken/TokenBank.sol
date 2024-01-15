@@ -13,20 +13,16 @@ contract TokenBank{
         my_token = MyToken(token);
     }
 
-    receive() external payable { 
-
-    }
     modifier onlyOwner(){
-        require(msg.sender == owner);
+        require(msg.sender == owner,"not owner!!");
         _;
     }
 
     
 
     function deposit(uint value)public returns (bool){
-        require(value <= my_token.allowance(msg.sender, address(this)),"allowance not enough");
+        require(value <= my_token.allowance(msg.sender, address(this)),"allowance not enough"); //需要先判断用户对于合约地址的授权额度
         bool success = my_token.transferFrom(msg.sender, address(this), value); 
-        //需要先判断用户对于合约地址的授权额度
         require(success,"transfer failed!!");
         balance[msg.sender] += value;
         return success;
