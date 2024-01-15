@@ -74,6 +74,24 @@ class Blockchain():
             block.nonce +=1
             hash = block.compute_hash()
         return hash
+    
+    def mine(self):
+        """
+        This function serves as an interface to add the pending
+        transactions to the blockchain by adding them to the block
+        and figuring out proof of work.
+        """
+        if not self.unconfirmed_transactions:
+            return False
+        last_block = self.last_block
+        new_block = Block(index=last_block.index + 1,
+                          transactions=self.unconfirmed_transactions,
+                          timestamp=time.time(),
+                          previous_hash=last_block.hash)
+        proof = self.proof_of_work(new_block)
+        self.add_block(new_block, proof)
+        self.unconfirmed_transactions = []
+        return new_block.index
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

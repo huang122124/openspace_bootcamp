@@ -14,6 +14,10 @@ contract BigBank is Bank{
         require(msg.value > 0.001 ether);
         _;
     }
+    modifier only_Owner() override  {
+        require(msg.sender == big_owner,"not owner!");
+        _;
+    }
 
     function set_Owner(address _owner)external only_Owner{
         big_owner = _owner;
@@ -27,8 +31,9 @@ contract BigBank is Bank{
         emit Receive_ETH(msg.value);
     }
 
-    function deposit(uint amount) public payable only_limited_ether{
-        (bool success,) = address(this).call{value:amount}("");
+    function deposit() public payable only_limited_ether{
+        (bool success,) = address(this).call{value:msg.value}("");
+        require(success,"deposit failed!!");
     }
 
     function withdraw() external override only_Owner{
@@ -55,6 +60,7 @@ contract Ownable{
         IBigBank(big_bank).withdraw();
     }
 
+    //owner可把Ownable合约余额转走
     function withdraw() external payable{
         require(msg.sender == owner,"not owner!");
         uint balance = address(this).balance;

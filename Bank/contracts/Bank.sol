@@ -48,7 +48,7 @@ contract Bank{
         }
     }
 
-    function withdraw() external only_Owner(){
+    function withdraw() external only_Owner{
         payable(msg.sender).transfer(address(this).balance);
     }
 //[22,33,55,12,9,28]
