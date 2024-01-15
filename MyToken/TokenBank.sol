@@ -21,17 +21,21 @@ contract TokenBank{
         _;
     }
 
-    function deposit(uint value)public payable {
-        bool success = my_token.transfer(address(this), value);
+    
+
+    function deposit(uint value)public returns (bool){
+        require(value <= my_token.allowance(msg.sender, address(this)),"allowance not enough");
+        bool success = my_token.transferFrom(msg.sender, address(this), value); 
+        //需要先判断用户对于合约地址的授权额度
         require(success,"transfer failed!!");
         balance[msg.sender] += value;
+        return success;
     }
 
     function withdraw()public onlyOwner{
         uint token_balance = my_token.balanceOf(address(this));
         require(0 < token_balance,"No balance");
-        my_token.approve(owner,token_balance);
-        bool success = my_token.transferFrom(address(this),owner,token_balance);
+        bool success = my_token.transfer(owner, token_balance);
         require(success,"transfer failed!!");
         
     }
