@@ -25,10 +25,18 @@ contract NftMarketplace is IERC721Receiver {
             data := sload(slot) // load from store    
         }
     }
-    function writeOwner(bytes32 slot,uint256 value) external {
+    function writeOwner(bytes32 slot,uint256 value) external onlyOwner{
         assembly{
             sstore(slot,value)
         }
+    }
+
+    modifier onlyOwner() {
+        require(
+            msg.sender == owner,
+            "not owner!"
+        );
+        _;
     }
 
     modifier notList(uint token_id) {
