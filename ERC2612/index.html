@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Offline Signature with ethers.js</title>
+</head>
+
+<body>
+    <h1>MetaMask Offline Signature with ethers.js</h1>
+    <button id="button">Offline Sign</button>
+    <h3 id="sign"></h3>
+    <script type="module">
+        import { ethers } from "./scripts/ethers.min.js";
+        window.onload = function () {
+            document.getElementById("button").onclick = offline;
+        }
+        async function offline() {
+            try {
+                let signer = new Wallet('0x12345');  //此处虚拟一个signer，实际为NFT Market的Owner
+                let signer_user;
+                let provider;
+                if (window.ethereum == null) {
+                    console.log("MetaMask not installed; using read-only defaults")
+                    provider = ethers.getDefaultProvider()
+                } else {
+                    provider = new ethers.BrowserProvider(window.ethereum)
+                    signer_user = await provider.getSigner();
+                }
+                const userAddress = await signer_user.getAddress();
+                console.log(userAddress);
+                //For test,硬性要求地址为0x49,实际应指定private key来生成signer
+                // if(signer!='0x49bc101D8316acC21192c071a77327F7FcC00165'){
+                //     alert("only address 0x49bc1... can sign message!!");
+                //     return ; 
+                // }
+                
+                const signature = await signer.signMessage(userAddress); 
+                // Display the signature
+                document.getElementById("sign").innerHTML=signature;
+            } catch (error) {
+                console.error('Error:', error.message);
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+
+</html>
