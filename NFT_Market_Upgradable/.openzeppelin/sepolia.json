@@ -1,0 +1,1262 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0x9CCdFf057dD4dcA9CC845378eC4960A56ED150b6",
+      "txHash": "0x80bab4924d0bb3454c28b6c8a6ccb60e2403a44cccf8e38463ba1ecf2081441f",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "e9e48fcd82442798c7053584a5083d96650902fbbe6fa1fe8b146b64787f523a": {
+      "address": "0xff03b244a6c6C04210cA7A8F9b2000B180d31D3A",
+      "txHash": "0x9786dd27baae7d5ffddef018da30e2d2751718203db182359f574a0500f4a67c",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplace",
+            "src": "contracts/Permit_NftMarketplace.sol:14"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplace",
+            "src": "contracts/Permit_NftMarketplace.sol:15"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplace",
+            "src": "contracts/Permit_NftMarketplace.sol:16"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplace",
+            "src": "contracts/Permit_NftMarketplace.sol:17"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplace",
+            "src": "contracts/Permit_NftMarketplace.sol:18"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplace",
+            "src": "contracts/Permit_NftMarketplace.sol:19"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "485cb91500e76d9da0049d8f043e25b500f4e6564ff6ac3e1d6f1f12e84cb77d": {
+      "address": "0x37a8Bb7F2D34a44b4C0d4563d0f1db0cB1fFbBb2",
+      "txHash": "0x81ab52c7db91d11e45bb64608024460b8a7268a5eb0178d42e04419c54b5c146",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:18"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:18"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:22"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "757a48820197c26bf41442c008bf270505cd997e79f2e604c3ab9edd290b5c14": {
+      "address": "0x667d068D284cd642C2BD6E379762e341C23Df927",
+      "txHash": "0x81f916df970f758afec2ec1ce7c9cc07f2d6968670fb306378b6e9df670d39ce",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:21"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:24"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "7ccd52251218ff4a99f27404a86057b50a6917c7aae29091554b6d51f91631b2": {
+      "address": "0xcfAcB0a5cd54Ae97FF1e0b8f6F958289f98Fb5f0",
+      "txHash": "0x10b6b644555812b352b1e1a42777af021b180cdac388a568f8affa4ac7c5f9f6",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:21"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:24"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "8a551a1f7cbee91cca917b178294f5e7e1325cb97ef377bc47f1a32464823c96": {
+      "address": "0x9F8AE14a66a17Aafbf12020E498067AC2b398989",
+      "txHash": "0xdd9464b5e4d44a79a3cf53c0bbb35018557b2c998b3df4eaae150ea473ba17c8",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:21"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:24"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "442de93b71873416b16a5a9000a5c27b5297349cc66fc4653c96dad24832e94d": {
+      "address": "0x93dFC549F0a7C9E5FA9824e1Dfd6de7751705900",
+      "txHash": "0x0313d3bf8b7bf23df1946948081d00625da1ec41acbdf25fcb90b59f68e0d6c6",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:21"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:24"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "b19b382664c753faae77a99616a8d4ed0be1ac8e5b39734561817ae94849272d": {
+      "address": "0xFb7624e659AC2588BB6baEB053ffeC15e8Cc6DdE",
+      "txHash": "0x1c19a271390ad8aea85a6dec6be9e8b8f2b2dfffa4312b3e20ad2153b3b86d29",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:21"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:24"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "be282f52390a10694eea509945905b299ede650ca711465a5bd1d404c22d095a": {
+      "address": "0x15653d97d101633EbbEe3A8CC9FBE537c4d9a479",
+      "txHash": "0xf0bf107e1208effa6ff9b250c245ea467ecf667672ebfaff179140f069a1863d",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:21"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:24"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "55a192ed68e659756e89cca16ce71cd4afd1821aa0304d5d59a8a08c9bfe1ca1": {
+      "address": "0x513381B1917Ad1a8fCacAaCEA9F92bB6c20E5055",
+      "txHash": "0xc8ddebe73f1d9420c93a3c664ffe68edfc0883fd6f72f279e0bc5cbd719507fe",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:21"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:24"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "db2f115751017a97552097fcf879df3a1955bbc466c62c37bbfa578a8a4667cb": {
+      "address": "0xBEE189C11Ec8f5881Ead0eE35EE97C6e12C276Cf",
+      "txHash": "0x939a97ffa5064c474801e09a78a41372272bf51d2d5d493155d402dfeba3b408",
+      "layout": {
+        "solcVersion": "0.8.23",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "nft",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:19"
+          },
+          {
+            "label": "erc20_token",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:20"
+          },
+          {
+            "label": "tokenPrice",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:21"
+          },
+          {
+            "label": "tokenSeller",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_address)",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:23"
+          },
+          {
+            "label": "sign",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bytes32",
+            "contract": "Permit_NftMarketplaceV2",
+            "src": "contracts/Permit_NftMarketplaceV2.sol:24"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)10_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

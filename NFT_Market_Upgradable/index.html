@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Offline Signature with ethers.js</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end
+        }
+
+        .sub-container {
+            display: flex;
+
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MetaMask Offline Signature with ethers.js</h1>
+    <p>Please input the address to be signed:</p>
+    <div class="form-container">
+        <div class="sub-container">
+            <h4>user:</h4><input id="user" type="text" name="address" placeholder="User">
+        </div>
+        <div class="sub-container">
+            <h4>token_id:</h4><input id="token_id" type="text" name="token_id" placeholder="Token ID" value="3">
+        </div>
+        <div class="sub-container">
+            <h4>amount:</h4><input id="amount" type="text" name="amount" placeholder="Amount" value="1">
+        </div>
+        <div class="sub-container">
+            <h4>salt:</h4><input id="salt" type="text" name="salt" placeholder="Salt" value="666">
+        </div>
+        <div class="sub-container">
+            <h4>signature:</h4><input id="signature" type="text" name="signature" placeholder="Signature"
+                value="0x39fa0d3c6c43ed39a7fca8cef981b9c2ce21e81b3dcdd0af7f8e5f3f5681d8073c70ce4c45a910bff0061094a03810143e4de08cab7b6e3abd15090a3d792e9a1b">
+        </div>
+    </div>
+    <button id="btn_sign">Offline Sign</button>
+    <button id="btn_list">List</button>
+    <button id="btn_buy_nft">buy NFT</button>
+    <button id="btn_revoke">Revoke NFT Approval</button>
+    <h3 id="sign"></h3>
+    <script type="module">
+        import { ethers } from "./ethers.min.js";
+        const NFT_MARKET_V2 = '0x9CCdFf057dD4dcA9CC845378eC4960A56ED150b6'   //marketV2 proxy
+        const TOKEN_ADDRESS = '0x9bE7bbB4659109E56EdC7637A5619DCB5B9a43bF'   //marketV2 proxy
+        const NFT_ADDDRESS = '0xf0f93144CECa5F5bbE6B953bDC3dD4991c2Ab7d3'   //marketV2 proxy
+        let token_id
+        let amount
+        let user
+        let salt
+        let signature = null
+
+        let signer = null
+        let provider
+        let contract_market
+        let contract_token
+        let contract_nft
+        window.onload = async function () {
+            document.getElementById("btn_sign").onclick = offline;
+            document.getElementById("btn_list").onclick = list;
+            document.getElementById("btn_buy_nft").onclick = buyNFT;
+            document.getElementById("btn_revoke").onclick = revokeNFTApproval;
+            if (window.ethereum == null) {
+                console.log("MetaMask not installed; using read-only defaults")
+                provider = ethers.getDefaultProvider()
+            } else {
+                provider = new ethers.BrowserProvider(window.ethereum)
+                signer = await provider.getSigner()
+                let abi_market = [
+                    "function nft() view returns (address)",
+                    "function buyNFT(uint,uint,uint,bytes)",
+                    "function isNFTOwner(uint) view returns (bool)",
+                    "function checkNFTApproved(uint) view returns(bool)"
+                ]
+                let abi_token = [
+                    "function approve(address,uint256) returns (bool)",
+                    "function allowance(address,address) view returns (uint256)"
+                ]
+                let abi_nft = [
+                    "function setApprovalForAll(address,bool)",
+                    "function isApprovedForAll(address,address) view returns (bool)"
+                ]
+                contract_market = new ethers.Contract(NFT_MARKET_V2, abi_market, signer)
+                contract_token = new ethers.Contract(TOKEN_ADDRESS, abi_token, signer)
+                contract_nft = new ethers.Contract(NFT_ADDDRESS, abi_nft, signer)
+            }
+            // 监听账户切换事件
+            window.ethereum.on("accountsChanged", async function (accounts) {
+                if (accounts.length > 0) {
+                    // 执行账户切换后的逻辑
+                    //accounts里的是钱包链接的所有账户地址
+                    signer = await provider.getSigner();
+                    console.log("切换到地址 : " + signer.address)
+                    contract_market = contract_market.connect(signer)
+                    contract_token = contract_token.connect(signer)
+                    contract_nft = contract_nft.connect(signer)
+                    
+                } else {
+                    // 处理没有连接账户的情况
+                    console.log('没有账户链接')
+                }
+            })
+        }
+        async function offline() {
+            try {
+                getInfos();
+                //specific signer with golbal provider
+                let wallet = new ethers.Wallet('8f5f5c4a6abf7ff59f4d48bc35c3b8ec0dd69d333354f8e397d6f2babca7d0b2', provider);
+                console.log("signer:", wallet.address);
+                document.getElementById("sign").innerHTML = wallet.address + "正在签名.....";
+                //For test,硬性要求地址为0x49,实际应指定private key来生成signer
+                // if(signer!='0x49bc101D8316acC21192c071a77327F7FcC00165'){
+                //     alert("only address 0x49bc1... can sign message!!");
+                //     return ; 
+                // }
+                if (user == wallet.address) {
+                    throw "user address can't same with signer!"
+                }
+                const msg_hash = ethers.solidityPackedKeccak256(
+                    ["uint256", "uint256", "address", "uint256"],
+                    [token_id, amount, user, salt])
+                signature = await wallet.signMessage(ethers.getBytes(msg_hash))
+                // Display the signature
+                console.log("signature:", signature);
+                document.getElementById("sign").innerHTML = signature;
+            } catch (error) {
+                console.error('Error:', error.message);
+                alert('Error: ' + error.message);
+            }
+        }
+
+
+        async function buyNFT() {
+            getInfos()
+            try {
+                //check signer is owner of nft or not...
+                let nft_approved = await contract_market.checkNFTApproved(token_id)
+                if (nft_approved) {
+                    console.log("Great! Nft have been approved All by owner");
+                    if (!await contract_market.isNFTOwner(token_id)) {
+                        //contract_token.connect(signer)
+                        await checkTokenApprove(amount)
+                        console.log("start to buy....");
+                        let tx = await contract_market.buyNFT(token_id, amount, salt, signature)
+                        console.log("waiting buy confirmed...");
+                        await tx.wait()
+                        alert("buy nft successfully!!")
+                        console.log("buy nft successfully!!");
+                    }else{
+                        console.log("You cannot buy your own nft!!");
+                    }
+
+
+                } else {
+                    console.log("nft not approved to market by owner,please contact owner listing item!");
+                }
+
+            } catch (error) {
+                console.log("error:", error);
+            }
+
+        }
+        async function list() {
+            try {
+                getInfos()
+                console.log("List--->>  signer: " + signer.address);
+                if (!token_id || !amount || !salt) {
+                    alert("please input completed data!")
+                } else {
+                    // check nft owner
+                    let isOwenr = await contract_market.isNFTOwner(token_id)
+                    if (isOwenr) {
+                        console.log("checking approval");
+                        let approved = await contract_market.checkNFTApproved(token_id)
+                        if (!approved) {
+                            let tx = await contract_nft.setApprovalForAll(NFT_MARKET_V2, true)
+                            console.log("waiting....");
+                            await tx.wait()
+                            console.log("Successfully set approval All to market");
+                            list_offline(token_id, amount, salt)
+                        }
+
+                    } else {
+                        alert("token_id :" + token_id + " is not yours!!!")
+                    }
+
+                }
+            } catch (error) {
+                console.log("error:", error);
+            }
+        }
+
+        async function revokeNFTApproval() {
+            let approved = await contract_nft.isApprovedForAll(signer.address, NFT_MARKET_V2)
+            if (approved) {
+                console.log("Requesting to revoke approval");
+                let tx = await contract_nft.setApprovalForAll(NFT_MARKET_V2, false)
+                console.log("waiting.....");
+                await tx.wait()
+                console.log("Revoke success!!!");
+            } else {
+                alert("not approved yet!!")
+            }
+        }
+
+        async function list_offline(token_id, amount, salt) {
+
+            const msg_hash = ethers.solidityPackedKeccak256(
+                ["uint256", "uint256", "uint256"],
+                [token_id, amount, salt])
+            let result = await signer.signMessage(ethers.getBytes(msg_hash))
+            console.log("已上架  token_id:" + token_id + "  amount:" + amount + " salt:" + salt);
+            console.log("signature:", result);
+            //save signature and nft infos....
+        }
+
+        async function checkTokenApprove(amount) {
+            let allowance = await contract_token.allowance(signer.address, NFT_MARKET_V2)
+            if (allowance < amount) {
+                let value = BigInt(amount) - BigInt(allowance)
+                console.log("requesting approval....");
+                let approved = await contract_token.approve(NFT_MARKET_V2, value)
+                console.log("waiting approval confirmed...");
+                await approved.wait()
+            }
+        }
+
+        function getInfos() {
+            token_id = document.getElementById("token_id").value
+            amount = document.getElementById("amount").value
+            user = document.getElementById("user").value
+            salt = document.getElementById("salt").value
+            signature = document.getElementById("signature").value
+        }
+    </script>
+</body>
+
+</html>

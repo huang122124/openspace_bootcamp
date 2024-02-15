@@ -1,0 +1,3 @@
+nft_market(proxy)V2 address(should be the same): 0x9CCdFf057dD4dcA9CC845378eC4960A56ED150b6
+0x513381B1917Ad1a8fCacAaCEA9F92bB6c20E5055  getImplementationAddress
+0x133656F9981881C297b1a21Bc6c3965Ab7C521Db  getAdminAddress
