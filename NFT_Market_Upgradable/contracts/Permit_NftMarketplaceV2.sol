@@ -12,6 +12,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 //V2 version NftMarketplace  第二版本,加入离线签名上架 NFT 功能方法(签名内容:tokenId, 价格),实现用户一次性
 //setApproveAll 给 NFT 市场合约,每次上架时使用签名上架。
 
+// Author:Kason
 contract Permit_NftMarketplaceV2 is IERC721Receiver, Initializable {
     address public owner;
     address public nft;
