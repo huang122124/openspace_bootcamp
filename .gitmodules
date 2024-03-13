@@ -1,0 +1,12 @@
+[submodule "MyUniswapV2DEX/lib/forge-std"]
+	path = MyUniswapV2DEX/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "MyUniswapV2DEX/lib/v2-core"]
+	path = MyUniswapV2DEX/lib/v2-core
+	url = https://github.com/Uniswap/v2-core
+[submodule "MyUniswapV2DEX/lib/v2-periphery"]
+	path = MyUniswapV2DEX/lib/v2-periphery
+	url = https://github.com/Uniswap/v2-periphery
+[submodule "lib/v2-core"]
+	path = lib/v2-core
+	url = https://github.com/Uniswap/v2-core

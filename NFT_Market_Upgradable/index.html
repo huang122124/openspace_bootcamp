@@ -103,8 +103,11 @@
     <script type="module">
         import { ethers } from "./ethers.min.js";
         const NFT_MARKET_V2 = '0x9CCdFf057dD4dcA9CC845378eC4960A56ED150b6'   //marketV2 proxy
-        const TOKEN_ADDRESS = '0x9bE7bbB4659109E56EdC7637A5619DCB5B9a43bF'   //marketV2 proxy
+        const KSN_ADDRESS = '0x9bE7bbB4659109E56EdC7637A5619DCB5B9a43bF'   //marketV2 proxy
         const NFT_ADDDRESS = '0xf0f93144CECa5F5bbE6B953bDC3dD4991c2Ab7d3'   //marketV2 proxy
+        const UNISWAPV2_ROUTER = '0x11c222e8A08f384a573a0Ba86175115421D54065'
+        const UNISWAPV2_FACTORY = '0xa202C2A01a9f0315Ce5CA2aD27e5066a0B29725f'
+        const WETH = '0x8F92582cCc7cF5f03378F3ed3751aDcd5e31Ef36'
         let token_id
         let amount
         let user
@@ -114,9 +117,11 @@
         let signer = null
         let provider
         let contract_market
-        let contract_token
         let contract_nft
+        let contract_router
+        let contract_factory
         window.onload = async function () {
+
             document.getElementById("btn_sign").onclick = offline;
             document.getElementById("btn_list").onclick = list;
             document.getElementById("btn_buy_nft").onclick = buyNFT;
@@ -135,15 +140,23 @@
                 ]
                 let abi_token = [
                     "function approve(address,uint256) returns (bool)",
-                    "function allowance(address,address) view returns (uint256)"
+                    "function allowance(address,address) view returns (uint256)",
+                    "function decimals() pure returns (uint8)"
                 ]
                 let abi_nft = [
                     "function setApprovalForAll(address,bool)",
                     "function isApprovedForAll(address,address) view returns (bool)"
                 ]
+                let abi_router = [
+                    "function getAmountsIn(uint,address[]) view returns (uint[])"
+                ]
+                let abi_factory = [
+                    "function getPair(address,address) view returns (address)"
+                ]
                 contract_market = new ethers.Contract(NFT_MARKET_V2, abi_market, signer)
-                contract_token = new ethers.Contract(TOKEN_ADDRESS, abi_token, signer)
                 contract_nft = new ethers.Contract(NFT_ADDDRESS, abi_nft, signer)
+                contract_router = new ethers.Contract(UNISWAPV2_ROUTER, abi_router, signer)
+                contract_factory = new ethers.Contract(UNISWAPV2_FACTORY, abi_factory, signer)
             }
             // 监听账户切换事件
             window.ethereum.on("accountsChanged", async function (accounts) {
@@ -153,9 +166,10 @@
                     signer = await provider.getSigner();
                     console.log("切换到地址 : " + signer.address)
                     contract_market = contract_market.connect(signer)
-                    contract_token = contract_token.connect(signer)
                     contract_nft = contract_nft.connect(signer)
-                    
+                    contract_router = contract_router.connect(signer)
+                    contract_factory = contract_factory.connect(signer)
+
                 } else {
                     // 处理没有连接账户的情况
                     console.log('没有账户链接')
@@ -192,28 +206,59 @@
 
 
         async function buyNFT() {
-            getInfos()
             try {
-                //check signer is owner of nft or not...
-                let nft_approved = await contract_market.checkNFTApproved(token_id)
-                if (nft_approved) {
-                    console.log("Great! Nft have been approved All by owner");
-                    if (!await contract_market.isNFTOwner(token_id)) {
-                        //contract_token.connect(signer)
-                        await checkTokenApprove(amount)
-                        console.log("start to buy....");
-                        let tx = await contract_market.buyNFT(token_id, amount, salt, signature)
-                        console.log("waiting buy confirmed...");
-                        await tx.wait()
-                        alert("buy nft successfully!!")
-                        console.log("buy nft successfully!!");
-                    }else{
-                        console.log("You cannot buy your own nft!!");
+                getInfos()
+                if (token_id != null) {
+                    //check signer is owner of nft or not...
+                    let nft_approved = await contract_market.checkNFTApproved(token_id)
+                    if (nft_approved) {
+                        console.log("Great! Nft have been approved All by owner");
+                        if (!await contract_market.isNFTOwner(token_id)) {
+                            //contract_token.connect(signer)
+                            let tokenA = prompt("请输入你的token地址来购买:", "0")
+                            if (tokenA != null) {
+                                if (ethers.isAddress(tokenA)) {
+                                    //caculate token amountIn
+                                    let path
+                                    let pair = await contract_factory.getPair(tokenA, KSN_ADDRESS)
+                                    if (pair != ethers.constants.AddressZero) {
+                                        //pair exist
+                                        path = [tokenA, KSN_ADDRESS]
+                                    } else {
+                                        //pair not exist
+                                        path = [tokenA, WETH, KSN_ADDRESS]
+                                    }
+                                    let amounts = await contract_router.getAmountsIn(amount, path)
+                                    let amonutIn = amounts[0]  //get amountIn in need
+                                    //设置滑点 为0.3%
+                                    let amountInMax = amonutIn * 1.003
+                                    //show amountIn to pay to user
+                                    var ok = confirm("you need to pay " + amountInMax)
+                                    if (ok) {
+                                        await checkTokenApprove(tokenA, amountInMax)
+                                        let deadline = getDeadline()   //1 day
+                                        console.log("start to buy....");
+                                        let tx = await contract_market.buyNFT(path, deadline, token_id, amount, salt, signature)
+                                        console.log("waiting buy confirmed...");
+                                        await tx.wait()
+                                        alert("buy nft successfully!!")
+                                        console.log("buy nft successfully!!");
+                                    } else {
+                                        alert("transaction canceled!")
+                                    }
+                                }
+
+
+                            }
+                        } else {
+                            console.log("You cannot buy your own nft!!");
+                        }
+
+
+                    } else {
+                        console.log("nft not approved to market by owner,please contact owner listing item!");
                     }
 
-
-                } else {
-                    console.log("nft not approved to market by owner,please contact owner listing item!");
                 }
 
             } catch (error) {
@@ -265,7 +310,7 @@
         }
 
         async function list_offline(token_id, amount, salt) {
-
+            //默认以KSN代币出售
             const msg_hash = ethers.solidityPackedKeccak256(
                 ["uint256", "uint256", "uint256"],
                 [token_id, amount, salt])
@@ -275,15 +320,31 @@
             //save signature and nft infos....
         }
 
-        async function checkTokenApprove(amount) {
-            let allowance = await contract_token.allowance(signer.address, NFT_MARKET_V2)
-            if (allowance < amount) {
-                let value = BigInt(amount) - BigInt(allowance)
+        async function checkTokenApprove(tokenA, amountInMax) {
+            let contract_tokenA = new ethers.Contract(tokenA, abi_token, signer)
+            let allowance_market = await contract_tokenA.allowance(signer.address, NFT_MARKET_V2)
+            if (allowance_market < amountInMax) {
                 console.log("requesting approval....");
-                let approved = await contract_token.approve(NFT_MARKET_V2, value)
+                let approved = await contract_tokenA.approve(NFT_MARKET_V2, ethers.constants.MaxUint256)
                 console.log("waiting approval confirmed...");
                 await approved.wait()
             }
+        }
+
+        function getNFTprice(token_id) {
+            return 1
+        }
+
+        async function getDeadline() {
+            const blockNumBefore = await provider.getBlockNumber();
+            const blockBefore = await provider.getBlock(blockNumBefore);
+            const timestampBefore = blockBefore.timestamp;
+            console.log("timestamp:", timestampBefore);
+            //1 Hour	3600 Seconds
+            // 1 Day	86400 Seconds
+            // 1 Week	604800 Seconds
+            const validity = 86400
+            return timestampBefore + validity
         }
 
         function getInfos() {
